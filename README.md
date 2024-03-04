@@ -47,21 +47,20 @@ cloudflared -v
 Here we are downloading the precompiled binary and copying it to the /usr/local/bin/ directory to allow execution by the cloudflared user. Proceed to run the binary with the -v flag to check it is all working:
 ```
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
-sudo mv -f ./cloudflared-linux-arm /usr/local/bin/cloudflared
+wget https://github.com/IndraGunawan/cloudflared-armv6/releases/download/2024.2.1-10/cloudflared
+sudo mv -f ./cloudflared /usr/local/bin/cloudflared
 sudo chmod +x /usr/local/bin/cloudflared
 cloudflared -v
 ```
-# Info
-
+# arm64 architecture (64-bit Raspberry Pi)
 Users have reported that the current version of cloudflared produces a segmentation fault error on Raspberry Pi Zero W, Model 1B and 2B. Currently, there is no known workaround.
 ```
-arm64 architecture (64-bit Raspberry Pi)¶
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
 sudo mv -f ./cloudflared-linux-arm64 /usr/local/bin/cloudflared
 sudo chmod +x /usr/local/bin/cloudflared
 cloudflared -v
 ```
-## cloudflared archive page
+# cloudflared archive page
 You can find all cloudflared binary releases on https://github.com/cloudflare/cloudflared/releases.
 
 Configuring cloudflared to run on startup¶
@@ -211,7 +210,7 @@ static ip_address=192.168.1.3/24
 static routers=192.168.1.1
 static domain_name_servers=127.0.0.1#5053
 ```
-## Install Pi-Hole to use DOH another computers.
+# Install Pi-Hole to use DOH another computers.
 `curl -sSL https://install.pi-hole.net |sudo bash`
 
 Select I already have static ip.
