@@ -64,10 +64,13 @@ cloudflared -v
 # cloudflared archive page
 You can find all cloudflared binary releases on https://github.com/cloudflare/cloudflared/releases.
 
-Configuring cloudflared to run on startup¶
-Create a cloudflared user to run the daemon:
+# Configuring cloudflared to run on startup:
+
+# Create a cloudflared user to run the daemon:
+
 `sudo useradd -s /usr/sbin/nologin -r -M cloudflared`
-Proceed to create a configuration file for cloudflared:
+
+# Proceed to create a configuration file for cloudflared:
 
 `sudo nano /etc/default/cloudflared`
 
@@ -137,9 +140,12 @@ google.com.             191     IN      A       172.217.22.14
 `pi@raspberrypi:~ $ sudo apt-get install dnsutils`
 # Configuring Pi-hole
 Finally, configure Pi-hole to use the local cloudflared service as the upstream DNS server by specifying 127.0.0.1#5053 as the Custom DNS (IPv4):
+
 `sudo nano /etc/dhcpcd.conf`
+
 Then change your settings accordingly. I am assuming you are using ethernet cable to connected to Wi-Fi router.
 If not use your selected interface. You can query your network interface with 
+
 ```
 pi@raspberrypi:~ $ ip r | grep default
 default via 192.168.1.1 dev eth0 src 192.168.1.3 metric 202
