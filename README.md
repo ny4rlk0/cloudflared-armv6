@@ -137,7 +137,6 @@ google.com.             191     IN      A       172.217.22.14
 `pi@raspberrypi:~ $ sudo apt-get install dnsutils`
 # Configuring Pi-hole
 Finally, configure Pi-hole to use the local cloudflared service as the upstream DNS server by specifying 127.0.0.1#5053 as the Custom DNS (IPv4):
-Type this
 `sudo nano /etc/dhcpcd.conf`
 Then change your settings accordingly. I am assuming you are using ethernet cable to connected to Wi-Fi router.
 If not use your selected interface. You can query your network interface with 
@@ -145,7 +144,7 @@ If not use your selected interface. You can query your network interface with
 pi@raspberrypi:~ $ ip r | grep default
 default via 192.168.1.1 dev eth0 src 192.168.1.3 metric 202
 ```
-See mine is eth0 if you are using different interface, and ip, change settings below accordingly. 
+See mine is eth0 if you are using different interface, and pi zero ip, router ip (modem) change settings below accordingly. 
 #Example /etc/dhcpcd.conf
 ```
 # A sample configuration for dhcpcd.
@@ -212,13 +211,17 @@ static ip_address=192.168.1.3/24
 static routers=192.168.1.1
 static domain_name_servers=127.0.0.1#5053
 ```
-##Install Pi-Hole to use DOH another computers.
+## Install Pi-Hole to use DOH another computers.
 `curl -sSL https://install.pi-hole.net |sudo bash`
+
 Select I already have static ip.
 Select I wanna use Custom DNS.
-Type this 
+Type this.
+
 `127.0.0.1#5053`
+
 Note your pi-hole password.
-Now set your router DNS adresses to 192.168.1.3 or another one if you changed that ip.
-Now you have set up a DOH server that queries DNS domains over HTTPS from Cloudflare.
-You can access your pi-hole from 192.168.1.3/admin and password you got while last page of the setup screen.
+
+Now set your router DNS adresses to `192.168.1.3` or another one if you changed that ip.
+Now you have set up a DOH server that queries DNS domains over HTTPS from `Cloudflare`.
+You can access your pi-hole from `192.168.1.3/admin` and `password` you got while last page of the setup screen.
