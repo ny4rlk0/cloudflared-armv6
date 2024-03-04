@@ -9,26 +9,26 @@ Unofficial builds for Raspberry Pi 1, Zero, and Zero W
 This repo **ONLY PROVIDES BINARIES FOR ARMv6 DEVICES AND DOES NOT ALTER SOURCE CODE** for the Cloudflared repo. For software issues regarding Cloudflared, go to the [Cloudflared repo](https://github.com/cloudflare/cloudflared) and open an issue there.
 
 
-Why use DNS-Over-HTTPS? 1¶
+## Why use DNS-Over-HTTPS?
 DNS-Over-HTTPS is a protocol for performing DNS lookups via the same protocol you use to browse the web securely: HTTPS.
 
 With standard DNS, requests are sent in plain-text, with no method to detect tampering or misbehavior. This means that not only can a malicious actor look at all the DNS requests you are making (and therefore what websites you are visiting), they can also tamper with the response and redirect your device to resources in their control (such as a fake login page for internet banking).
 
 DNS-Over-HTTPS prevents this by using standard HTTPS requests to retrieve DNS information. This means that the connection from the device to the DNS server is secure and can not easily be snooped, monitored, tampered with or blocked. It is worth noting, however, that the upstream DNS-Over-HTTPS provider will still have this ability.
 
-Configuring DNS-Over-HTTPS¶
+## Configuring DNS-Over-HTTPS
 Along with releasing their DNS service 1.1.1.1, Cloudflare implemented DNS-Over-HTTPS proxy functionality into one of their tools: cloudflared.
 
 In the following sections, we will be covering how to install and configure this tool on Pi-hole.
 
-Info
+## Info
 
 The cloudflared binary will work with other DoH providers (for example, you could use https://8.8.8.8/dns-query for Google's DNS-Over-HTTPS service).
 
-Installing cloudflared¶
+## Installing cloudflared
 The installation is fairly straightforward, however, be aware of what architecture you are installing on (amd64 or arm).
 
-AMD64 architecture (most devices)¶
+## AMD64 architecture (most devices)
 Download the installer package, then use apt-get to install the package along with any dependencies. Proceed to run the binary with the -v flag to check it is all working:
 
 # For Debian/Ubuntu
@@ -43,7 +43,7 @@ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudfla
 sudo yum install ./cloudflared-linux-x86_64.rpm
 cloudflared -v
 ```
-armhf architecture (32-bit Raspberry Pi)¶
+## armhf architecture (32-bit Raspberry Pi, Pi Zero)
 Here we are downloading the precompiled binary and copying it to the /usr/local/bin/ directory to allow execution by the cloudflared user. Proceed to run the binary with the -v flag to check it is all working:
 ```
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
@@ -51,7 +51,7 @@ sudo mv -f ./cloudflared-linux-arm /usr/local/bin/cloudflared
 sudo chmod +x /usr/local/bin/cloudflared
 cloudflared -v
 ```
-Info
+## Info
 
 Users have reported that the current version of cloudflared produces a segmentation fault error on Raspberry Pi Zero W, Model 1B and 2B. Currently, there is no known workaround.
 ```
@@ -61,7 +61,7 @@ sudo mv -f ./cloudflared-linux-arm64 /usr/local/bin/cloudflared
 sudo chmod +x /usr/local/bin/cloudflared
 cloudflared -v
 ```
-cloudflared archive page¶
+## cloudflared archive page
 You can find all cloudflared binary releases on https://github.com/cloudflare/cloudflared/releases.
 
 Configuring cloudflared to run on startup¶
@@ -104,7 +104,7 @@ KillMode=process
 WantedBy=multi-user.target
 Enable the systemd service to run on startup, then start the service and check its status:
 ```
-#Set it up
+# Set it up
 ```
 sudo systemctl enable cloudflared
 sudo systemctl start cloudflared
@@ -141,7 +141,13 @@ Type this
 ```
 sudo nano /etc/dhcpcd.conf
 ```
-Then change your settings accordingly.
+Then change your settings accordingly. I am assuming you are using ethernet cable to connected to Wi-Fi router.
+If not use your selected interface. You can query your network interface with 
+```
+pi@raspberrypi:~ $ ip r | grep default
+default via 192.168.1.1 dev eth0 src 192.168.1.3 metric 202
+```
+See mine is eth0 if you are using different interface, and ip, change settings below accordingly. 
 #Example /etc/dhcpcd.conf
 ```
 # A sample configuration for dhcpcd.
