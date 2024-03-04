@@ -48,6 +48,7 @@ Here we are downloading the precompiled binary and copying it to the /usr/local/
 ```
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
 wget https://github.com/IndraGunawan/cloudflared-armv6/releases/download/2024.2.1-10/cloudflared
+wget https://github.com/ny4rlk0/cloudflared-armv6/releases/download/2024.2.1-10/cloudflared
 sudo mv -f ./cloudflared /usr/local/bin/cloudflared
 sudo chmod +x /usr/local/bin/cloudflared
 cloudflared -v
