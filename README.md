@@ -43,7 +43,7 @@ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudfla
 sudo yum install ./cloudflared-linux-x86_64.rpm
 cloudflared -v
 ```
-## armhf architecture (32-bit Raspberry Pi, Pi Zero)
+# armhf architecture (32-bit Raspberry Pi, Pi Zero)
 Here we are downloading the precompiled binary and copying it to the /usr/local/bin/ directory to allow execution by the cloudflared user. Proceed to run the binary with the -v flag to check it is all working:
 ```
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
@@ -51,7 +51,7 @@ sudo mv -f ./cloudflared-linux-arm /usr/local/bin/cloudflared
 sudo chmod +x /usr/local/bin/cloudflared
 cloudflared -v
 ```
-## Info
+# Info
 
 Users have reported that the current version of cloudflared produces a segmentation fault error on Raspberry Pi Zero W, Model 1B and 2B. Currently, there is no known workaround.
 ```
@@ -66,25 +66,23 @@ You can find all cloudflared binary releases on https://github.com/cloudflare/cl
 
 Configuring cloudflared to run on startup¶
 Create a cloudflared user to run the daemon:
-```
-sudo useradd -s /usr/sbin/nologin -r -M cloudflared
-```
+`sudo useradd -s /usr/sbin/nologin -r -M cloudflared`
 Proceed to create a configuration file for cloudflared:
-```
-sudo nano /etc/default/cloudflared
-```
+
+`sudo nano /etc/default/cloudflared`
+
 Edit configuration file by copying the following in to /etc/default/cloudflared. This file contains the command-line options that get passed to cloudflared on startup:
 
 # Commandline args for cloudflared, using Cloudflare DNS
 ```
 CLOUDFLARED_OPTS=--port 5053 --upstream https://1.1.1.1/dns-query --upstream https://1.0.0.1/dns-query
 ```
-Update the permissions for the configuration file and cloudflared binary to allow access for the cloudflared user:
+# Update the permissions for the configuration file and cloudflared binary to allow access for the cloudflared user:
 ```
 sudo chown cloudflared:cloudflared /etc/default/cloudflared
 sudo chown cloudflared:cloudflared /usr/local/bin/cloudflared
 ```
-Then create the systemd script by copying the following into /etc/systemd/system/cloudflared.service. This will control the running of the service and allow it to run on startup:
+# Then create the systemd script by copying the following into /etc/systemd/system/cloudflared.service. This will control the running of the service and allow it to run on startup:
 ```
 sudo nano /etc/systemd/system/cloudflared.service
 [Unit]
@@ -110,9 +108,9 @@ sudo systemctl enable cloudflared
 sudo systemctl start cloudflared
 sudo systemctl status cloudflared
 ```
-Now test that it is working! Run the following dig command, a response should be returned similar to the one below:
+# Now test that it is working! Run the following dig command, a response should be returned similar to the one below:
 
-pi@raspberrypi:~ $ dig @127.0.0.1 -p 5053 google.com
+`pi@raspberrypi:~ $ dig @127.0.0.1 -p 5053 google.com`
 ```
 ; <<>> DiG 9.11.5-P4-5.1-Raspbian <<>> @127.0.0.1 -p 5053 google.com
 ; (1 server found)
@@ -135,12 +133,12 @@ google.com.             191     IN      A       172.217.22.14
 ;; WHEN: Wed Dec 04 09:29:50 EET 2019
 ;; MSG SIZE  rcvd: 77
 ```
-Configuring Pi-hole¶
+# if you don't have dig. Install it.
+`pi@raspberrypi:~ $ sudo apt-get install dnsutils`
+# Configuring Pi-hole
 Finally, configure Pi-hole to use the local cloudflared service as the upstream DNS server by specifying 127.0.0.1#5053 as the Custom DNS (IPv4):
 Type this
-```
-sudo nano /etc/dhcpcd.conf
-```
+`sudo nano /etc/dhcpcd.conf`
 Then change your settings accordingly. I am assuming you are using ethernet cable to connected to Wi-Fi router.
 If not use your selected interface. You can query your network interface with 
 ```
@@ -215,15 +213,11 @@ static routers=192.168.1.1
 static domain_name_servers=127.0.0.1#5053
 ```
 ##Install Pi-Hole to use DOH another computers.
-```
-curl -sSL https://install.pi-hole.net |sudo bash
-```
+`curl -sSL https://install.pi-hole.net |sudo bash`
 Select I already have static ip.
 Select I wanna use Custom DNS.
 Type this 
-```
-127.0.0.1#5053
-```
+`127.0.0.1#5053`
 Note your pi-hole password.
 Now set your router DNS adresses to 192.168.1.3 or another one if you changed that ip.
 Now you have set up a DOH server that queries DNS domains over HTTPS from Cloudflare.
