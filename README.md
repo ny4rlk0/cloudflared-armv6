@@ -43,7 +43,7 @@ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudfla
 sudo yum install ./cloudflared-linux-x86_64.rpm
 cloudflared -v
 ```
-# armhf architecture (32-bit Raspberry Pi, Pi Zero)
+# armhf architecture (32-bit Raspberry Pi OS Legacy, Pi Zero)
 Here we are downloading the precompiled binary and copying it to the /usr/local/bin/ directory to allow execution by the cloudflared user. Proceed to run the binary with the -v flag to check it is all working:
 ```
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
