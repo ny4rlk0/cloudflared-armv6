@@ -1,6 +1,6 @@
 # Cloudflared ARMv6 Build Repository
 
-My favorite setup is connect a Pi With at least 512 mb ram / wifi to usb supported modem to save space / power pi on. Then forget it exists! 
+My favorite setup is connect a Pi With at least 512 mb ram / wifi to usb supported modem to save space / power pi on. Then forget it exists! Also don't forget to set it up Pi-Hole to Anonymous / no logging mode! Less file = Longer sd card lasts.
 
 Unofficial builds for Raspberry Pi 1, Zero, and Zero W
 
