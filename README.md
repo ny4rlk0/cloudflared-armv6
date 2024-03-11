@@ -228,8 +228,8 @@ Type this.
 <br>
 Note your pi-hole password.
 <br>
-Now set your router DNS adresses to `192.168.1.3` or another one if you changed that ip.
+Now set your router DNS adresses to `192.168.1.3` from inside the routers web admin page, or give pi's ip addresses as dns to other computers one by one.
 <br>
-Now you have set it up a DOH server that queries DNS domains over HTTPS from `Cloudflare` successfully.
+Now you successfully set it up a DOH server that queries DNS domains over HTTPS from `Cloudflare`.
 <br>
 You can access your pi-hole from `192.168.1.3/admin` and `password` you got while last page of the setup screen.
