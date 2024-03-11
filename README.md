@@ -76,7 +76,7 @@ You can find all cloudflared binary releases on https://github.com/cloudflare/cl
 
 Edit configuration file by copying the following in to /etc/default/cloudflared. This file contains the command-line options that get passed to cloudflared on startup:
 
-# Commandline args for cloudflared, using Cloudflare DNS
+# Commandline args for cloudflared, using Cloudflare DNS (Paste this while editing cloudflared)
 ```
 CLOUDFLARED_OPTS=--port 5053 --upstream https://1.1.1.1/dns-query --upstream https://1.0.0.1/dns-query
 ```
