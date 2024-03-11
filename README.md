@@ -225,9 +225,11 @@ Select I wanna use Custom DNS.
 Type this.
 
 `127.0.0.1#5053`
-
+<br>
 Note your pi-hole password.
-
+<br>
 Now set your router DNS adresses to `192.168.1.3` or another one if you changed that ip.
-Now you have set up a DOH server that queries DNS domains over HTTPS from `Cloudflare`.
+<br>
+Now you have set it up a DOH server that queries DNS domains over HTTPS from `Cloudflare` successfully.
+<br>
 You can access your pi-hole from `192.168.1.3/admin` and `password` you got while last page of the setup screen.
