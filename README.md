@@ -151,7 +151,7 @@ pi@raspberrypi:~ $ ip r | grep default
 default via 192.168.1.1 dev eth0 src 192.168.1.3 metric 202
 ```
 See mine is eth0 if you are using different interface, and pi zero ip, router ip (modem) change settings below accordingly. 
-#Example /etc/dhcpcd.conf
+# Example /etc/dhcpcd.conf
 ```
 # A sample configuration for dhcpcd.
 # See dhcpcd.conf(5) for details.
