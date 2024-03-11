@@ -86,6 +86,7 @@ sudo chown cloudflared:cloudflared /etc/default/cloudflared
 sudo chown cloudflared:cloudflared /usr/local/bin/cloudflared
 ```
 # Then create the systemd script by copying the following into /etc/systemd/system/cloudflared.service. This will control the running of the service and allow it to run on startup:
+`sudo nano /etc/systemd/system/cloudflared.service`
 ```
 sudo nano /etc/systemd/system/cloudflared.service
 [Unit]
